@@ -96,7 +96,7 @@ func main() {
 	// prefix it with the * symbol) before using it. Note that we're using the
 	// log.Printf() function to interpolate the address with the log message.
 	infoLog.Printf("Starting server on %s", *addr)
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	errorLog.Fatal(err)
 }
 
