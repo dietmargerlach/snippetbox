@@ -25,9 +25,9 @@ func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
 
 	// Define a new command-line flag for the MySQL DSN string.
-	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
+	// dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
 	// probably we have to use the line
-	// dsn := flag.String("dsn", "web:pass@tcp/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "web:pass@tcp/snippetbox?parseTime=true", "MySQL data source name")
 	// because we are using the mysql db from a docker container with mapped standard port 3306 to localhost
 
 	// Importantly, we use the flag.Parse() function to parse the command-line flag.
