@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"database/sql"
+	"errors"
 
 	"github.com/dietmargerlach/snippetbox/pkg/models"
 )
@@ -59,16 +60,17 @@ func (m *SnippetModel) Get(id int) (*models.Snippet, error) {
 	// and the number of arguments must be exactly the same as the number of
 	// columns returned by your statement.
 
-	err:= row.Scan(&s.ID, &s.Title, &s.Content, &s.Created, &s.Expires)
+	err := row.Scan(&s.ID, &s.Title, &s.Content, &s.Created, &s.Expires)
 	if err != nil {
 		// If the query returns no rows, then row.Scan() will return a
 		// sql.ErrNoRows error. We use the errors.Is() function check for that
 		// error specifically, and return our own models.ErrNoRecord error
 		// instead.
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, models.ErrNoRecord			
-	} else {
-		return nil, err
+			return nil, models.ErrNoRecord
+		} else {
+			return nil, err
+		}
 	}
 	// If everything went OK then return the Snippet object.
 	return s, nil
