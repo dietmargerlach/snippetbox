@@ -7,12 +7,12 @@ import (
 	"github.com/dietmargerlach/snippetbox/pkg/models"
 )
 
-// Define a SnippetModel type which wraps a sql.DB connection pool.
+// SnippetModel type  wraps a sql.DB connection pool.
 type SnippetModel struct {
 	DB *sql.DB
 }
 
-// This will insert a new snippet into the database.
+// Insert will insert a new snippet into the database.
 func (m *SnippetModel) Insert(title, content, expires string) (int, error) {
 	// Write the SQL statement we want to execute. I've split it over two lines
 	// for readability (which is why it's surrounded with backquotes instead
@@ -39,7 +39,7 @@ func (m *SnippetModel) Insert(title, content, expires string) (int, error) {
 	return int(id), nil
 }
 
-// This will return a specific snippet based on its id.
+// Get will return a specific snippet based on its id.
 func (m *SnippetModel) Get(id int) (*models.Snippet, error) {
 	// Write the SQL statement we want to execute. Again, I've split it over two
 	// lines for readability.
@@ -68,15 +68,15 @@ func (m *SnippetModel) Get(id int) (*models.Snippet, error) {
 		// instead.
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, models.ErrNoRecord
-		} else {
-			return nil, err
 		}
+		return nil, err
+
 	}
 	// If everything went OK then return the Snippet object.
 	return s, nil
 }
 
-// This will return the 10 most recently created snippets.
+// Latest will return the 10 most recently created snippets.
 func (m *SnippetModel) Latest() ([]*models.Snippet, error) {
 	return nil, nil
 }
